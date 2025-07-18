@@ -9,7 +9,7 @@ export const theme = {
   },
   fontSizes: {
     text: '1.4rem',
-    btn: '1.6rem',d
+    btn: '1.6rem',
   },
   lineHeight: {
     md: '1.25',

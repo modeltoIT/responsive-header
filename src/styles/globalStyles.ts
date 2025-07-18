@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
+import Poppins from '../assets/fonts/Poppins-Regular.woff2';
+import Raleway from '../assets/fonts/Raleway-SemiBold.woff2';
+
 export const GlobalStyles = createGlobalStyle`
   ${normalize}
 
@@ -9,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+    src: url(${Poppins}) format('woff2');
   }
   
   @font-face {
@@ -17,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url('/fonts/Raleway-SemiBold.woff2') format('woff2');
+    src: url(${Raleway}) format('woff2');
   }
   
   html {

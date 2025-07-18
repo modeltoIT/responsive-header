@@ -8,7 +8,7 @@ import React, {
 import styled from 'styled-components';
 
 import type { NavItem } from '../../types/navigation.interface.ts';
-import { ChevronIcon as Chevron } from '../../assets';
+import { ChevronIcon as Chevron } from '../../assets/icons';
 
 interface Props {
   items: NavItem[];

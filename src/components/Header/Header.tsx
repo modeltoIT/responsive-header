@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { CloseMenuIcon, HamburgerMenuIcon } from '../../assets';
-import logoIcon from '../../assets/logo.webp';
+import { CloseMenuIcon, HamburgerMenuIcon } from '../../assets/icons';
+import logoIcon from '../../assets/icons/logo.webp';
 
 import { MobileMenu } from '../MobileMenu';
 import { Navigation } from '../Navigation';

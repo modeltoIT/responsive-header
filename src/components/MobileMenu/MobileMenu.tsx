@@ -27,6 +27,10 @@ const MenuContainer = styled.aside<{ $isOpen: boolean }>`
   transition: transform 300ms ease-in-out;
   transform: ${({ $isOpen }) =>
     $isOpen ? 'translateY(0)' : 'translateY(-100%)'};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: none;
+  }
 `;
 
 const BtnLinkContainer = styled.div`

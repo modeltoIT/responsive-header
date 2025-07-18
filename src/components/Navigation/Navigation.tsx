@@ -6,6 +6,7 @@ import { navItems } from './navigationData.ts';
 
 interface Props {
   closeMobileMenu: () => void;
+  isDesktopMenu?: boolean;
 }
 
 const NavigationList = styled.ul`
@@ -16,6 +17,12 @@ const NavigationList = styled.ul`
   margin: 0;
 
   list-style: none;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+  }
 `;
 
 const ListItem = styled.li`
@@ -28,7 +35,7 @@ const NavLink = styled.a`
   font-size: ${({ theme }) => theme.fontSizes.text};
 `;
 
-export const Navigation: FC<Props> = ({ closeMobileMenu }) => {
+export const Navigation: FC<Props> = ({ closeMobileMenu, isDesktopMenu }) => {
   const followLink: MouseEventHandler<HTMLAnchorElement> = e => {
     e.preventDefault();
 
@@ -44,6 +51,7 @@ export const Navigation: FC<Props> = ({ closeMobileMenu }) => {
               items={item.children}
               headerName={item.label}
               onClick={followLink}
+              isDesktopMenu={isDesktopMenu}
             />
           ) : (
             <NavLink

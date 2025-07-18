@@ -22,12 +22,12 @@ export const GlobalStyles = createGlobalStyle`
   
   html {
     font-size: 62.5%;
-    scrollbar-gutter: stable both-edges;
   }
 
   body {
     min-width: 32rem;
     font-family: 'Poppins', 'Raleway', sans-serif;
     font-weight: 400;
+    line-height: 0;
   }
 `;

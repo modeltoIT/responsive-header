@@ -28,7 +28,7 @@ const MenuContainer = styled.aside<{ $isOpen: boolean }>`
   transform: ${({ $isOpen }) =>
     $isOpen ? 'translateY(0)' : 'translateY(-100%)'};
 
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
     display: none;
   }
 `;

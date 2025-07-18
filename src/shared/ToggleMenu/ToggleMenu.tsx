@@ -23,15 +23,14 @@ const ToggleMenuContainer = styled.div<{ $isOpen: boolean }>`
   width: max-content;
   gap: 1rem;
   transition: max-height 300ms ease-in-out;
-  max-height: ${({ $isOpen }) => ($isOpen ? '30rem' : '2.6rem')};
-
   overflow: hidden;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.large}) {
+    max-height: ${({ $isOpen }) => ($isOpen ? '30rem' : '2.6rem')};
+  }
 `;
 
 const ToggleButton = styled.button`
-  position: relative;
-  z-index: 20;
-
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -39,6 +38,9 @@ const ToggleButton = styled.button`
   padding: 0.5rem 0;
   border: none;
   background-color: white;
+
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.fontSizes.text};
 
   cursor: pointer;
 `;
@@ -58,14 +60,27 @@ const ChevronIcon = styled(Chevron)<{
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(0)' : 'rotate(180deg)')}}
 `;
 
-const NavigationList = styled.ul<{ $isOpen: boolean }>`
+const NavigationContainer = styled.ul<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 0;
   margin: 0;
-
   list-style: none;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    position: absolute;
+    padding-block: 1.1rem;
+    top: 7.4rem;
+    z-index: -1;
+    gap: 0.4rem;
+    border: 1px solid #ddd;
+    border-top: none;
+
+    transition: transform 300ms ease-in-out;
+    transform: ${({ $isOpen }) =>
+      $isOpen ? 'translate(-25%, 0%)' : 'translate(-25%, -100%)'};
+  }
 `;
 
 const ListItem = styled.li`
@@ -76,6 +91,15 @@ const NavLink = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.fontSizes.text};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.large}) {
+    display: block;
+    padding: ${({ theme }) => theme.padding['nav-item']};
+
+    &:hover {
+      background-color: rgba(221, 221, 221, 0.3);
+    }
+  }
 `;
 
 export const ToggleMenu: FC<Props> = ({
@@ -108,6 +132,12 @@ export const ToggleMenu: FC<Props> = ({
     }
   };
 
+  const onClickLink: MouseEventHandler<HTMLAnchorElement> = e => {
+    onClick(e);
+
+    if (isDesktopMenu) setIsOpen(false);
+  };
+
   const onBlurHandler: EventListener = e => {
     const target = e.target as HTMLElement;
 
@@ -129,9 +159,8 @@ export const ToggleMenu: FC<Props> = ({
 
   return (
     <ToggleMenuContainer $isOpen={isOpen}>
-      <NavLink
+      <ToggleButton
         ref={dropDownBtn}
-        as={ToggleButton}
         aria-label={isOpen ? 'Open services' : 'Close services'}
         onClick={toggleDropDown}
       >
@@ -141,9 +170,9 @@ export const ToggleMenu: FC<Props> = ({
           $width={9}
           $height={6}
         />
-      </NavLink>
+      </ToggleButton>
 
-      <NavigationList
+      <NavigationContainer
         ref={dropDownList}
         tabIndex={-1}
         $isOpen={isOpen}
@@ -152,13 +181,13 @@ export const ToggleMenu: FC<Props> = ({
           <ListItem key={item.id}>
             <NavLink
               href={item.href}
-              onClick={onClick}
+              onClick={onClickLink}
             >
               {item.label}
             </NavLink>
           </ListItem>
         ))}
-      </NavigationList>
+      </NavigationContainer>
     </ToggleMenuContainer>
   );
 };

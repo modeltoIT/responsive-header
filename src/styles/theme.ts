@@ -18,13 +18,16 @@ export const theme = {
   padding: {
     'header-small': '2rem',
     header: '2rem 2.6rem',
+    'header-large': '1.15rem 6rem',
     mobileMenu: '8.4rem 2rem 2.7rem 2rem',
     linkBtn: '1rem 2rem',
+    'nav-item': '0.8rem 3.15rem',
     small: '3px 0',
   },
   breakpoints: {
     mobile: '480px',
-    tablet: '768px',
+    large: '992px',
     desktop: '1024px',
+    'large-desktop': '1440px',
   },
 };

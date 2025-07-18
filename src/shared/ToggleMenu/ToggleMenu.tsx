@@ -161,7 +161,7 @@ export const ToggleMenu: FC<Props> = ({
     <ToggleMenuContainer $isOpen={isOpen}>
       <ToggleButton
         ref={dropDownBtn}
-        aria-label={isOpen ? 'Open services' : 'Close services'}
+        aria-label={isOpen ? 'Close services' : 'Open services'}
         onClick={toggleDropDown}
       >
         <HeaderText>{headerName}</HeaderText>

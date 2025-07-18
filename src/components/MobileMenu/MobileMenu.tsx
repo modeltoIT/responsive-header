@@ -1,8 +1,9 @@
-import type { FC, MouseEventHandler } from 'react';
+import type { FC } from 'react';
 import styled from 'styled-components';
 
 import { Navigation } from '../Navigation';
 import { ButtonLink } from '../../shared/ButtonLink';
+import { useAuthLinks } from '../../hooks/useAuth.ts';
 
 interface Props {
   isMenuOpen: boolean;
@@ -41,17 +42,7 @@ const BtnLinkContainer = styled.div`
 `;
 
 export const MobileMenu: FC<Props> = ({ isMenuOpen, closeMobileMenu }) => {
-  const registerUser: MouseEventHandler<HTMLAnchorElement> = e => {
-    e.preventDefault();
-
-    closeMobileMenu();
-  };
-
-  const singInUser: MouseEventHandler<HTMLAnchorElement> = e => {
-    e.preventDefault();
-
-    closeMobileMenu();
-  };
+  const { onRegister, onSignIn } = useAuthLinks(closeMobileMenu);
 
   return (
     <MenuContainer $isOpen={isMenuOpen}>
@@ -60,14 +51,14 @@ export const MobileMenu: FC<Props> = ({ isMenuOpen, closeMobileMenu }) => {
       <BtnLinkContainer>
         <ButtonLink
           href={'/'}
-          onClick={registerUser}
+          onClick={onRegister}
         >
           Register
         </ButtonLink>
 
         <ButtonLink
           href={'/'}
-          onClick={singInUser}
+          onClick={onSignIn}
           $bgColor={'secondary'}
         >
           Sign in

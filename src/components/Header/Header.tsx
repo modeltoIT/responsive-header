@@ -1,12 +1,13 @@
-import { type MouseEventHandler, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { CloseMenuIcon, HamburgerMenuIcon } from '../../assets';
-import logoIcon from '../../assets/logo.png';
+import logoIcon from '../../assets/logo.webp';
 
 import { MobileMenu } from '../MobileMenu';
 import { Navigation } from '../Navigation';
 import { ButtonLink } from '../../shared/ButtonLink';
+import { useAuthLinks } from '../../hooks/useAuth.ts';
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -25,6 +26,8 @@ const HeaderDesktop = styled.div`
     justify-content: space-between;
     gap: 2rem;
     background-color: white;
+    max-width: 144rem;
+    margin-inline: auto;
 
     padding: ${({ theme }) => theme.padding['header-large']};
     border-bottom: 1px solid #ddd;
@@ -77,6 +80,7 @@ const MenuButton = styled.button`
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { onRegister, onSignIn } = useAuthLinks();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -84,14 +88,6 @@ export const Header = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-
-  const registerUser: MouseEventHandler<HTMLAnchorElement> = e => {
-    e.preventDefault();
-  };
-
-  const singInUser: MouseEventHandler<HTMLAnchorElement> = e => {
-    e.preventDefault();
   };
 
   return (
@@ -111,14 +107,14 @@ export const Header = () => {
           <BtnLinkContainer>
             <ButtonLink
               href={'/'}
-              onClick={registerUser}
+              onClick={onRegister}
             >
               Register
             </ButtonLink>
 
             <ButtonLink
               href={'/'}
-              onClick={singInUser}
+              onClick={onSignIn}
               $bgColor={'secondary'}
             >
               Sign in

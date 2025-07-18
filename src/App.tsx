@@ -4,7 +4,7 @@ import { theme } from './styles/theme.ts';
 
 const MainSection = styled.main`
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 
   padding-top: 7.5rem;
 `;

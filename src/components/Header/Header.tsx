@@ -4,12 +4,21 @@ import styled from 'styled-components';
 import { CloseMenuIcon, HamburgerMenuIcon } from '../../assets';
 import logoIcon from '../../assets/logo.png';
 
+import { MobileMenu } from '../MobileMenu';
+
 const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: ${({ theme }) => theme.padding['header-small']};
 
-  padding: 2rem 2.6rem;
+  background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const LogoIcon = styled.img`
@@ -29,23 +38,44 @@ const MenuButton = styled.button`
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  return (
-    <HeaderContainer>
-      <LogoIcon src={logoIcon} />
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-      <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        {isMenuOpen ? (
-          <CloseMenuIcon
-            width={40}
-            height={30}
-          />
-        ) : (
-          <HamburgerMenuIcon
-            width={40}
-            height={22}
-          />
-        )}
-      </MenuButton>
-    </HeaderContainer>
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <>
+      <HeaderContainer>
+        <LogoIcon
+          src={logoIcon}
+          alt="Company Logo"
+        />
+
+        <MenuButton
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? (
+            <CloseMenuIcon
+              width={40}
+              height={30}
+            />
+          ) : (
+            <HamburgerMenuIcon
+              width={40}
+              height={22}
+            />
+          )}
+        </MenuButton>
+      </HeaderContainer>
+
+      <MobileMenu
+        isMenuOpen={isMenuOpen}
+        closeMobileMenu={closeMenu}
+      />
+    </>
   );
 };

@@ -3,11 +3,31 @@ import { normalize } from 'styled-normalize';
 
 export const GlobalStyles = createGlobalStyle`
   ${normalize}
+
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/Raleway-SemiBold.woff2') format('woff2');
+  }
+  
   html {
     font-size: 62.5%;
+    scrollbar-gutter: stable both-edges;
   }
 
   body {
     min-width: 32rem;
+    font-family: 'Poppins', 'Raleway', sans-serif;
+    font-weight: 400;
   }
 `;

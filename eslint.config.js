@@ -15,7 +15,7 @@ export default tseslint.config([
       prettier: eslintPluginPrettier,
     },
     rules: {
-      'prettier/prettier': 'error',
+      'prettier/prettier': ['error', { printWidth: 80 }],
     },
     extends: [
       js.configs.recommended,
